@@ -1,5 +1,13 @@
 2008-11-24  Wakaba  <wakaba@suika.fam.cx>
 
+	* .htaccess: AddLangauge was missing.
+
+	* Makefile: Add <link rel=feed> to |readme.html|.
+
+	* mkcommitfeed.pl: Added availability sections to the document.
+
+2008-11-24  Wakaba  <wakaba@suika.fam.cx>
+
 	* Makefile: Added rules to make |readme.html|.
 
 	* mkcommitfeed.pl: Added documentation.

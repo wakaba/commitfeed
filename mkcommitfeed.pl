@@ -153,7 +153,7 @@ $content->text_content ($entry_content);
   print $file $doc->inner_html;
 }
 
-## $Date: 2008/11/24 06:18:00 $
+## $Date: 2008/11/24 06:31:25 $
 
 __END__
 
@@ -408,6 +408,27 @@ Shows a help message and aborts.
 
 =back
 
+=head1 DEPENDENCY
+
+For the execution of C<mkcommitfeed.pl>, the libiraries below are
+required, as well as Perl 5.10.0 or later:
+
+manakai-core L<http://suika.fam.cx/www/manakai-core/doc/web/>
+
+Whatpm L<http://suika.fam.cx/www/markup/html/whatpm/readme>
+
+=head1 DOWNLOAD
+
+The latest version of this script is available from the CVS
+repository: L<http://suika.fam.cx/gate/cvs/webroot/commitfeed/>.
+
+A gzipped tarball for the files is also available:
+L<http://suika.fam.cx/gate/cvs/webroot/commitfeed/commitfeed.tar.gz?tarball=1>.
+
+=head1 SEE ALSO
+
+The C<mkcommitfeed.pl> Web site
+L<http://suika.fam.cx/commitfeed/readme>.
 
 =head1 AUTHOR
 
@@ -431,4 +452,4 @@ modify it under the same terms as Perl itself.
 
 =cut
 
-## $Date: 2008/11/24 06:18:00 $
+## $Date: 2008/11/24 06:31:25 $
