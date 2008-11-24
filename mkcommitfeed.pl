@@ -1,6 +1,9 @@
 #!/usr/bin/perl
 use strict;
 
+use Data::Dumper;
+print Dumper \@ARGV;
+
 use Getopt::Long;
 use Pod::Usage;
 use Time::Local;
@@ -153,4 +156,4 @@ $content->text_content ($entry_content);
   print $file $doc->inner_html;
 }
 
-## $Date: 2008/11/24 04:54:25 $
+## $Date: 2008/11/24 05:21:35 $
