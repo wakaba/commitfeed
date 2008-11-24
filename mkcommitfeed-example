@@ -1,9 +1,9 @@
 #!/bin/sh
 perl \
-    -I/home/httpd/html/manakai-core/lib/ \
+    -I/home/httpd/html/www/manakai-core/lib/ \
     -I/home/httpd/html/www/markup/html/whatpm/ \
     /home/httpd/html/commitfeed/mkcommitfeed.pl \
     "$@"
 
 ## License: Public Domain.
-## $Date: 2008/11/24 05:21:35 $
+## $Date: 2008/11/24 05:22:29 $
