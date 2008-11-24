@@ -1,5 +1,15 @@
 2008-11-24  Wakaba  <wakaba@suika.fam.cx>
 
+	* Makefile: Added rules to make |readme.html|.
+
+	* mkcommitfeed.pl: Added documentation.
+
+2008-11-24  Wakaba  <wakaba@suika.fam.cx>
+
+	* .htaccess: New file.
+
+2008-11-24  Wakaba  <wakaba@suika.fam.cx>
+
 	* mkcommitfeed-example: Path was wrong.
 
 2008-11-24  Wakaba  <wakaba@suika.fam.cx>

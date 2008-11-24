@@ -1,9 +1,6 @@
 #!/usr/bin/perl
 use strict;
 
-use Data::Dumper;
-print Dumper \@ARGV;
-
 use Getopt::Long;
 use Pod::Usage;
 use Time::Local;
@@ -156,4 +153,282 @@ $content->text_content ($entry_content);
   print $file $doc->inner_html;
 }
 
-## $Date: 2008/11/24 05:21:35 $
+## $Date: 2008/11/24 06:18:00 $
+
+__END__
+
+=head1 NAME
+
+mkcommitfeed.pl - Commit Log Feed Generator
+
+=head1 SYNOPSIS
+
+  mkcommitfeed.pl \
+    --file-name filename.atom \
+    --feed-url http://example.com/myproject/filename.atom \
+    --feed-title "MyProject Commit Log" \
+    --feed-lang langtag \
+    --feed-related-url "http://example.com/myproject/" \
+    --feed-license-url "http://example.com/myproject/license" \
+    --feed-rights "Copyright or copyleft statement" \
+    < changes-in-this-revision.txt
+
+=head1 DESCRIPTION
+
+The C<mkcommitfeed.pl> script provides a command-line interface to
+update an Atom Feed that is intended for providing commit logs for a
+software developmenet project.
+
+The script, when invoked, adds an Atom Entry that describes a change
+made to the project's repository.
+
+=head1 STANDARD INPUT
+
+A description for the change must be specified to the standard input.
+It is used as the plain text content of the atom:content element of
+the Entry for the change to add.
+
+Non-ASCII characters are not supported in this version of this script.
+Maybe a future version of this script would support UTF-8.
+
+=head1 ARGUMENTS
+
+There are command-line options for the script.  Some of them are
+required, while the others are optional.  As a general rule, an option
+whose name begins with C<--entry> specifies a property for the Entry
+to add, while an option whose name begins with C<--feed> specifies a
+property for the entire Feed.  Option values for Feed properties might
+not be used when updating an existing Feed document.
+
+=over 4
+
+=item C<--entry-author-mail I<foo@domain.example>> (optional)
+
+Specifies the mail address of the person who made a change.  It is
+used as the content of the C<atom:email> element of the C<atom:author>
+element of the Entry.
+
+If this option is not specified, but the standard input includes a
+ChangeLog entry in the standard GNU format, then the mail address is
+taken from the ChangeLog entry.  Otherwise, C<atom:email> element is
+not specified.
+
+The option value must be an RFC 2822 C<addr-spec> that does not match
+C<obs-addr-spec> (i.e. standard email address format).  Otherwise the
+generated Feed would be non-conforming.
+
+=item C<--entry-author-name I<author-name>> (conditionally required)
+
+Specifies the human readable name of the person who made a change.  It
+is used as the content of the C<atom:name> element of the
+C<atom:author> element of the Entry.
+
+If this option is not specified, but the standard input includes a
+ChangeLog entry in the standard GNU format, then the name is taken
+from the ChangeLog entry.  If the standard input does not include a
+GNU format ChangeLog entry, then the C<--entry-author-name> option
+must be specified.
+
+Non-ASCII characters are not supported in this version of this script.
+
+=item C<--entry-content I<description>> (optional)
+
+Specifies the description of the change.  It is used as the content of
+the C<atom:content> element of the Entry, with C<type=text>.
+
+If this option is specified, its value is used as if it were from the
+standard input and the actual standard input, if any, is ignored.  If
+neither this option nor the standard input is specified, then the
+description is assumed as the empty string.
+
+Non-ASCII characters are not supported in this version of this script.
+
+=item C<--entry-title I<title>> (optional)
+
+Specifies the title of the change.  It is used as the content of the
+C<atom:title> element of the Entry, with C<type=text>.
+
+If this option is not specified, then the date of the change, as well
+as the name of the author, is used as title.
+
+Non-ASCII characters are not supported in this version of this script.
+
+=item C<--feed-author-mail I<foo@domain.example>> (optional)
+
+Specifies the mail address of the author of the Feed.  It is used as
+the content of the C<atom:email> element of the C<atom:author> element
+of the Feed.
+
+This option is ignored if the C<--feed-author-name> option is not
+specified.
+
+If this option is not specified, C<atom:email> element is not
+specified.
+
+The option value must be an RFC 2822 C<addr-spec> that does not match
+C<obs-addr-spec> (i.e. standard email address format).  Otherwise the
+generated Feed would be non-conforming.
+
+This option is ignored if the Feed already has an C<atom:author>
+element.
+
+=item C<--feed-author-name I<author-name>> (optional)
+
+Specifies the human readable name of the author of the Feed.  It is
+used as the content of the C<atom:name> element of the C<atom:author>
+element of the Feed.
+
+If this option is not specified, the C<atom:author> element is not
+specified in the Feed.
+
+Non-ASCII characters are not supported in this version of this script.
+
+This option is ignored if the Feed already has an C<atom:author>
+element.
+
+=item C<--feed-author-url I<url>> (optional)
+
+Specifies the URI for the author (e.g. URL of the Web page for the
+author).  It is used as the content of the C<atom:uri> element of the
+C<atom:author> element of the Feed.
+
+If the C<--feed-author-name> option is not specified, this option is
+ignored.
+
+If this option is not specified, the C<atom:uri> element is not
+specified.
+
+The option value must be a URI reference conforming to RFC 3986.  It
+should be an absolute reference unless you understand what is the base
+URL that is used to resolve a relative reference.  Non-ASCII
+characters (i.e. IRI references) are not supported in this version of
+this script.
+
+This option is ignored if the Feed already has an C<atom:author>
+element.
+
+=item C<--feed-lang I<langtag>> (optional)
+
+Specifies the natural language used in textual parts of the Feed.  It
+is used as the value of C<xml:lang> attribute of the root element of
+the Feed.
+
+If this option is not specified, the default value I<i-default> is used.
+
+This option is ignored if the Feed already exists and has a
+C<atom:link> element.
+
+=item C<--feed-license-url I<url>> (optional)
+
+Specifies the URL that describes the license of the Feed.  It is used
+as the C<href> attribute value of an C<atom:link> element whose C<rel>
+is C<license>.
+
+If this option is not specified, the C<atom:link> element whose C<rel>
+is C<license> is not specified.
+
+The option value must be a URI reference conforming to RFC 3986.  It
+should be an absolute reference unless you understand what is the base
+URL that is used to resolve a relative reference.  Non-ASCII
+characters (i.e. IRI references) are not supported in this version of
+this script.
+
+This option is ignored if the Feed already has a C<atom:link>
+element.
+
+=item C<--feed-related-url I<url>> (optional)
+
+Specifies a related URL for the Feed.  Usually the URL for the project
+Web page should be specified.  It is used as the C<href> attribute
+value of an C<atom:link> element whose C<rel> is C<related>.
+
+If this option is not specified, the C<atom:link> element whose C<rel>
+is C<related> is not specified.
+
+The option value must be a URI reference conforming to RFC 3986.  It
+should be an absolute reference unless you understand what is the base
+URL that is used to resolve a relative reference.  Non-ASCII
+characters (i.e. IRI references) are not supported in this version of
+this script.
+
+This option is ignored if the Feed already has a C<atom:link>
+element.
+
+=item C<--feed-rights C<license-terms>> (optional)
+
+Specifies the license terms for the Feed.  It is used as the content
+of the C<atom:rights> element of the Feed.
+
+If there is the C<atom:rights> element exists, its value is replaced
+by the value of this option.
+
+If this option is not specified, the C<atom:rights> element is not
+added.  If there are already the C<atom:rights> element specified,
+however, it is not removed from the Feed.
+
+Non-ASCII characters are not supported in this version of this script.
+
+=item C<--feed-title C<title>> (optional)
+
+Specifies the title of the Feed.  It is used as the content of the
+C<atom:title> of the Feed.
+
+If this option is not specified, the default value "ChangeLog" is used.
+
+If there is Feed exists, then this option is ignored.
+
+Non-ASCII characters are not supported in this version of this script.
+
+=item C<--feed-url C<url>> (required)
+
+Specifies the URL of the Feed itself.  It is used in various places,
+such as in the C<href> attribute of the C<atom:link> element whose
+C<rel> is C<self>.
+
+The option value must be a URI reference conforming to RFC 3986.  It
+should be an absolute reference unless you understand what is the base
+URL that is used to resolve a relative reference.  Non-ASCII
+characters (i.e. IRI references) are not supported in this version of
+this script.
+
+=item C<--file-name C<path-to-atom-file>> (required)
+
+Specifies the path to the file that contains the Atom Feed.
+
+If the specified file is not found, then a new file is created.
+Otherwise, the existing file is loaded as an Atom Feed and then it is
+updated.
+
+The file, if exists, must be encoded in UTF-8.  The new content of the
+file generated by this script is encoded in UTF-8.
+
+=item C<--help>
+
+Shows a help message and aborts.
+
+=back
+
+
+=head1 AUTHOR
+
+Wakaba <w@suika.fam.cx>.
+
+=head1 HISTORY
+
+This module was originally developed as part of Whatpm
+L<http://suika.fam.cx/www/markup/html/whatpm/readme>.
+
+An Atom Feed for updates for this script, which is itself generated by
+this script, is available at
+L<http://suika.fam.cx/commitfeed/commitfeed-commit>.
+
+=head1 LICENSE
+
+Copyright 2008 Wakaba <w@suika.fam.cx>
+
+This program is free software; you can redistribute it and/or
+modify it under the same terms as Perl itself.
+
+=cut
+
+## $Date: 2008/11/24 06:18:00 $

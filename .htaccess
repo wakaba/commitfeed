@@ -1,0 +1,5 @@
+AddType application/atom+xml .atom
+AddCharset utf-8 .u8
+
+## $Date: 2008/11/24 06:18:00 $
+## License: Public Domain.
