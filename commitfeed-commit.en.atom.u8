@@ -3,4 +3,15 @@
 
 2008-11-24  Wakaba  &lt;wakaba@suika.fam.cx&gt;
 
+</content></entry><entry xml:id="entry-1227507495"><id>http://suika.fam.cx/harusame/commitfeed-commit#entry-1227507495</id><title>2008-11-24 Wakaba</title><updated>2008-11-24T06:18:01Z</updated><author><name>Wakaba</name><email>wakaba@suika.fam.cx</email></author><content type="text">++ ChangeLog	24 Nov 2008 06:17:32 -0000
+	* Makefile: Added rules to make |readme.html|.
+
+	* mkcommitfeed.pl: Added documentation.
+
+2008-11-24  Wakaba  &lt;wakaba@suika.fam.cx&gt;
+
+	* .htaccess: New file.
+
+2008-11-24  Wakaba  &lt;wakaba@suika.fam.cx&gt;
+
 </content></entry></feed>
