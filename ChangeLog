@@ -1,5 +1,10 @@
 2008-11-24  Wakaba  <wakaba@suika.fam.cx>
 
+	* mkcommitfeed.pl: Update <atom:updated> of the Feed as well as
+	<atom:updated> of the Entry when an Entry is added.
+
+2008-11-24  Wakaba  <wakaba@suika.fam.cx>
+
 	* .htaccess: AddLangauge was missing.
 
 	* Makefile: Add <link rel=feed> to |readme.html|.

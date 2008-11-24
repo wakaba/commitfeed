@@ -148,12 +148,20 @@ my $content = $entry->content_element;
 $content->type ('text');
 $content->text_content ($entry_content);
 
+my $feed_date = $entry_date;
+my $feed_updated = $feed->updated_element;
+my $feed_updated_value = $feed_updated->value;
+if ($feed_updated_value < $feed_date) {
+  $feed_updated->value ($feed_date);
+}
+
+
 {
   open my $file, '>:utf8', $file_name or die "$0: $file_name: $!";
   print $file $doc->inner_html;
 }
 
-## $Date: 2008/11/24 06:31:25 $
+## $Date: 2008/11/24 06:34:49 $
 
 __END__
 
@@ -452,4 +460,4 @@ modify it under the same terms as Perl itself.
 
 =cut
 
-## $Date: 2008/11/24 06:31:25 $
+## $Date: 2008/11/24 06:34:49 $
