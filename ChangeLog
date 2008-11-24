@@ -1,5 +1,9 @@
 2008-11-24  Wakaba  <wakaba@suika.fam.cx>
 
+	* mkcommitfeed-example: Fixed a typo.
+
+2008-11-24  Wakaba  <wakaba@suika.fam.cx>
+
 	* Makefile: New file.
 
 	* mkcommitfeed-example: New file.
