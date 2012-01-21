@@ -13,5 +13,4 @@ mkcommitfeed \
 cvs commit -m "" commitfeed-commit.en.atom.u8
 rm .cvslog.tmp
 
-## $Date: 2008/11/24 05:08:39 $
 ## License: Public Domain
