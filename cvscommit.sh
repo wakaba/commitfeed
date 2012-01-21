@@ -3,7 +3,7 @@ find -name ChangeLog | xargs cvs diff | grep "^\+" | sed -e "s/^\+//; s/^\+\+ .\
 cvs commit -F .cvslog.tmp $1 $2 $3 $4 $5 $6 $7 $8 $9 
 mkcommitfeed \
     --file-name commitfeed-commit.en.atom.u8 \
-    --feed-url http://suika.fam.cx/harusame/commitfeed-commit \
+    --feed-url http://suika.fam.cx/commitfeed/commitfeed-commit \
     --feed-title "CommitFeed ChangeLog diffs" \
     --feed-lang en \
     --feed-related-url "http://suika.fam.cx/commitfeed/readme" \
