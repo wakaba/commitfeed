@@ -16,4 +16,3 @@ uninstall-example:
 	rm /usr/local/bin/mkcommitfeed
 
 ## License: Public Domain.
-## $Date: 2008/11/24 06:31:25 $
