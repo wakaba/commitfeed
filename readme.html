@@ -1,315 +1,247 @@
-<?xml version="1.0" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>mkcommitfeed.pl - Commit Log Feed Generator</title>
-<link rel="stylesheet" href="http://suika.fam.cx/www/style/html/pod.css" type="text/css" />
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link rev="made" href="mailto:root@localhost" />
-<link rel=feed type="application/atom+xml" href=commitfeed-commit>
 
-<body>
+      <!DOCTYPE HTML>
+      <html lang=en>
+        <meta charset=utf-8>
+        <title>commitfeed</title>
+        <link rel=stylesheet href="https://manakai.github.io/css/pod.css">
+        <meta name=viewport content="width=device-width">
+
+        <h1><a href="../" rel=top>commitfeed</a></h1>
+
+        
 
 
-<!-- INDEX BEGIN -->
-<div name="index">
-<p><a name="__index__"></a></p>
 
-<ul>
 
-	<li><a href="#name">NAME</a></li>
-	<li><a href="#synopsis">SYNOPSIS</a></li>
-	<li><a href="#description">DESCRIPTION</a></li>
-	<li><a href="#standard_input">STANDARD INPUT</a></li>
-	<li><a href="#arguments">ARGUMENTS</a></li>
-	<li><a href="#dependency">DEPENDENCY</a></li>
-	<li><a href="#availability">AVAILABILITY</a></li>
-	<li><a href="#see_also">SEE ALSO</a></li>
-	<li><a href="#author">AUTHOR</a></li>
-	<li><a href="#history">HISTORY</a></li>
-	<li><a href="#license">LICENSE</a></li>
-</ul>
 
-<hr name="index" />
-</div>
-<!-- INDEX END -->
+<section id="NAME"><h1>NAME</h1>
 
-<p>
-</p>
-<h1><a name="name">NAME</a></h1>
 <p>mkcommitfeed.pl - Commit Log Feed Generator</p>
-<p>
-</p>
-<hr />
-<h1><a name="synopsis">SYNOPSIS</a></h1>
-<pre>
-  mkcommitfeed.pl \
+
+</section><section id="SYNOPSIS"><h1>SYNOPSIS</h1>
+
+<pre><code>  mkcommitfeed.pl \
     --file-name filename.atom \
-    --feed-url <a href="http://example.com/myproject/filename.atom">http://example.com/myproject/filename.atom</a> \
-    --feed-title &quot;MyProject Commit Log&quot; \
+    --feed-url http://example.com/myproject/filename.atom \
+    --feed-title "MyProject Commit Log" \
     --feed-lang langtag \
-    --feed-related-url &quot;<a href="http://example.com/myproject/&quot">http://example.com/myproject/&quot</a>; \
-    --feed-license-url &quot;<a href="http://example.com/myproject/license&quot">http://example.com/myproject/license&quot</a>; \
-    --feed-rights &quot;Copyright or copyleft statement&quot; \
-    &lt; changes-in-this-revision.txt</pre>
-<p>
-</p>
-<hr />
-<h1><a name="description">DESCRIPTION</a></h1>
-<p>The <code>mkcommitfeed.pl</code> script provides a command-line interface to
-update an Atom Feed that is intended for providing commit logs for a
-software developmenet project.</p>
-<p>The script, when invoked, adds an Atom Entry that describes a change
-made to the project's repository.</p>
-<p>
-</p>
-<hr />
-<h1><a name="standard_input">STANDARD INPUT</a></h1>
-<p>A description for the change must be specified to the standard input.
-It is used as the plain text content of the atom:content element of
-the Entry for the change to add.</p>
-<p>Non-ASCII characters are not supported in this version of this script.
-Maybe a future version of this script would support UTF-8.</p>
-<p>
-</p>
-<hr />
-<h1><a name="arguments">ARGUMENTS</a></h1>
-<p>There are command-line options for the script.  Some of them are
-required, while the others are optional.  As a general rule, an option
-whose name begins with <code>--entry</code> specifies a property for the Entry
-to add, while an option whose name begins with <code>--feed</code> specifies a
-property for the entire Feed.  Option values for Feed properties might
-not be used when updating an existing Feed document.</p>
+    --feed-related-url "http://example.com/myproject/" \
+    --feed-license-url "http://example.com/myproject/license" \
+    --feed-rights "Copyright or copyleft statement" \
+    &lt; changes-in-this-revision.txt</code></pre>
+
+</section><section id="DESCRIPTION"><h1>DESCRIPTION</h1>
+
+<p>The <code>mkcommitfeed.pl</code> script provides a command-line interface to update an Atom Feed that is intended for providing commit logs for a software developmenet project.</p>
+
+<p>The script, when invoked, adds an Atom Entry that describes a change made to the project's repository.</p>
+
+</section><section id="STANDARD_INPUT"><h1>STANDARD INPUT</h1>
+
+<p>A description for the change must be specified to the standard input. It is used as the plain text content of the atom:content element of the Entry for the change to add.</p>
+
+<p>Non-ASCII characters are not supported in this version of this script. Maybe a future version of this script would support UTF-8.</p>
+
+</section><section id="ARGUMENTS"><h1>ARGUMENTS</h1>
+
+<p>There are command-line options for the script. Some of them are required, while the others are optional. As a general rule, an option whose name begins with <code>--entry</code> specifies a property for the Entry to add, while an option whose name begins with <code>--feed</code> specifies a property for the entire Feed. Option values for Feed properties might not be used when updating an existing Feed document.</p>
+
 <dl>
-<dt><strong><a name="example" class="item"><code>--entry-author-mail foo@domain.example</code> (optional)</a></strong></dt>
+<dt id="--entry-author-mail_foo@domain.example_(optional)"><code>--entry-author-mail <i>foo@domain.example</i></code> (optional)</dt>
 
 <dd>
-<p>Specifies the mail address of the person who made a change.  It is
-used as the content of the <code>atom:email</code> element of the <code>atom:author</code>
-element of the Entry.</p>
-<p>If this option is not specified, but the standard input includes a
-ChangeLog entry in the standard GNU format, then the mail address is
-taken from the ChangeLog entry.  Otherwise, <code>atom:email</code> element is
-not specified.</p>
-<p>The option value must be an <a href="http://www.ietf.org/rfc/rfc2822.txt" class="rfc">RFC 2822</a> <code>addr-spec</code> that does not match
-<code>obs-addr-spec</code> (i.e. standard email address format).  Otherwise the
-generated Feed would be non-conforming.</p>
-</dd>
-<dt><strong><a name="name" class="item"><code>--entry-author-name author-name</code> (conditionally required)</a></strong></dt>
+<p>Specifies the mail address of the person who made a change. It is used as the content of the <code>atom:email</code> element of the <code>atom:author</code> element of the Entry.</p>
+
+<p>If this option is not specified, but the standard input includes a ChangeLog entry in the standard GNU format, then the mail address is taken from the ChangeLog entry. Otherwise, <code>atom:email</code> element is not specified.</p>
+
+<p>The option value must be an RFC 2822 <code>addr-spec</code> that does not match <code>obs-addr-spec</code> (i.e. standard email address format). Otherwise the generated Feed would be non-conforming.</p>
+
+</dd><dt id="--entry-author-name_author-name_(conditionally_required)"><code>--entry-author-name <i>author-name</i></code> (conditionally required)</dt>
 
 <dd>
-<p>Specifies the human readable name of the person who made a change.  It
-is used as the content of the <code>atom:name</code> element of the
-<code>atom:author</code> element of the Entry.</p>
-<p>If this option is not specified, but the standard input includes a
-ChangeLog entry in the standard GNU format, then the name is taken
-from the ChangeLog entry.  If the standard input does not include a
-GNU format ChangeLog entry, then the <code>--entry-author-name</code> option
-must be specified.</p>
+<p>Specifies the human readable name of the person who made a change. It is used as the content of the <code>atom:name</code> element of the <code>atom:author</code> element of the Entry.</p>
+
+<p>If this option is not specified, but the standard input includes a ChangeLog entry in the standard GNU format, then the name is taken from the ChangeLog entry. If the standard input does not include a GNU format ChangeLog entry, then the <code>--entry-author-name</code> option must be specified.</p>
+
 <p>Non-ASCII characters are not supported in this version of this script.</p>
-</dd>
-<dt><strong><a name="description" class="item"><code>--entry-content description</code> (optional)</a></strong></dt>
+
+</dd><dt id="--entry-content_description_(optional)"><code>--entry-content <i>description</i></code> (optional)</dt>
 
 <dd>
-<p>Specifies the description of the change.  It is used as the content of
-the <code>atom:content</code> element of the Entry, with <code>type=text</code>.</p>
-<p>If this option is specified, its value is used as if it were from the
-standard input and the actual standard input, if any, is ignored.  If
-neither this option nor the standard input is specified, then the
-description is assumed as the empty string.</p>
+<p>Specifies the description of the change. It is used as the content of the <code>atom:content</code> element of the Entry, with <code>type=text</code>.</p>
+
+<p>If this option is specified, its value is used as if it were from the standard input and the actual standard input, if any, is ignored. If neither this option nor the standard input is specified, then the description is assumed as the empty string.</p>
+
 <p>Non-ASCII characters are not supported in this version of this script.</p>
-</dd>
-<dt><strong><a name="title" class="item"><code>--entry-title title</code> (optional)</a></strong></dt>
+
+</dd><dt id="--entry-title_title_(optional)"><code>--entry-title <i>title</i></code> (optional)</dt>
 
 <dd>
-<p>Specifies the title of the change.  It is used as the content of the
-<code>atom:title</code> element of the Entry, with <code>type=text</code>.</p>
-<p>If this option is not specified, then the date of the change, as well
-as the name of the author, is used as title.</p>
+<p>Specifies the title of the change. It is used as the content of the <code>atom:title</code> element of the Entry, with <code>type=text</code>.</p>
+
+<p>If this option is not specified, then the date of the change, as well as the name of the author, is used as title.</p>
+
 <p>Non-ASCII characters are not supported in this version of this script.</p>
-</dd>
-<dt><strong><code>--feed-author-mail foo@domain.example</code> (optional)</strong></dt>
+
+</dd><dt id="--feed-author-mail_foo@domain.example_(optional)"><code>--feed-author-mail <i>foo@domain.example</i></code> (optional)</dt>
 
 <dd>
-<p>Specifies the mail address of the author of the Feed.  It is used as
-the content of the <code>atom:email</code> element of the <code>atom:author</code> element
-of the Feed.</p>
-<p>This option is ignored if the <code>--feed-author-name</code> option is not
-specified.</p>
-<p>If this option is not specified, <code>atom:email</code> element is not
-specified.</p>
-<p>The option value must be an <a href="http://www.ietf.org/rfc/rfc2822.txt" class="rfc">RFC 2822</a> <code>addr-spec</code> that does not match
-<code>obs-addr-spec</code> (i.e. standard email address format).  Otherwise the
-generated Feed would be non-conforming.</p>
-<p>This option is ignored if the Feed already has an <code>atom:author</code>
-element.</p>
-</dd>
-<dt><strong><code>--feed-author-name author-name</code> (optional)</strong></dt>
+<p>Specifies the mail address of the author of the Feed. It is used as the content of the <code>atom:email</code> element of the <code>atom:author</code> element of the Feed.</p>
+
+<p>This option is ignored if the <code>--feed-author-name</code> option is not specified.</p>
+
+<p>If this option is not specified, <code>atom:email</code> element is not specified.</p>
+
+<p>The option value must be an RFC 2822 <code>addr-spec</code> that does not match <code>obs-addr-spec</code> (i.e. standard email address format). Otherwise the generated Feed would be non-conforming.</p>
+
+<p>This option is ignored if the Feed already has an <code>atom:author</code> element.</p>
+
+</dd><dt id="--feed-author-name_author-name_(optional)"><code>--feed-author-name <i>author-name</i></code> (optional)</dt>
 
 <dd>
-<p>Specifies the human readable name of the author of the Feed.  It is
-used as the content of the <code>atom:name</code> element of the <code>atom:author</code>
-element of the Feed.</p>
-<p>If this option is not specified, the <code>atom:author</code> element is not
-specified in the Feed.</p>
+<p>Specifies the human readable name of the author of the Feed. It is used as the content of the <code>atom:name</code> element of the <code>atom:author</code> element of the Feed.</p>
+
+<p>If this option is not specified, the <code>atom:author</code> element is not specified in the Feed.</p>
+
 <p>Non-ASCII characters are not supported in this version of this script.</p>
-<p>This option is ignored if the Feed already has an <code>atom:author</code>
-element.</p>
-</dd>
-<dt><strong><a name="url" class="item"><code>--feed-author-url url</code> (optional)</a></strong></dt>
+
+<p>This option is ignored if the Feed already has an <code>atom:author</code> element.</p>
+
+</dd><dt id="--feed-author-url_url_(optional)"><code>--feed-author-url <i>url</i></code> (optional)</dt>
 
 <dd>
-<p>Specifies the URI for the author (e.g. URL of the Web page for the
-author).  It is used as the content of the <code>atom:uri</code> element of the
-<code>atom:author</code> element of the Feed.</p>
-<p>If the <code>--feed-author-name</code> option is not specified, this option is
-ignored.</p>
-<p>If this option is not specified, the <code>atom:uri</code> element is not
-specified.</p>
-<p>The option value must be a URI reference conforming to <a href="http://www.ietf.org/rfc/rfc3986.txt" class="rfc">RFC 3986</a>.  It
-should be an absolute reference unless you understand what is the base
-URL that is used to resolve a relative reference.  Non-ASCII
-characters (i.e. IRI references) are not supported in this version of
-this script.</p>
-<p>This option is ignored if the Feed already has an <code>atom:author</code>
-element.</p>
-</dd>
-<dt><strong><a name="langtag" class="item"><code>--feed-lang langtag</code> (optional)</a></strong></dt>
+<p>Specifies the URI for the author (e.g. URL of the Web page for the author). It is used as the content of the <code>atom:uri</code> element of the <code>atom:author</code> element of the Feed.</p>
+
+<p>If the <code>--feed-author-name</code> option is not specified, this option is ignored.</p>
+
+<p>If this option is not specified, the <code>atom:uri</code> element is not specified.</p>
+
+<p>The option value must be a URI reference conforming to RFC 3986. It should be an absolute reference unless you understand what is the base URL that is used to resolve a relative reference. Non-ASCII characters (i.e. IRI references) are not supported in this version of this script.</p>
+
+<p>This option is ignored if the Feed already has an <code>atom:author</code> element.</p>
+
+</dd><dt id="--feed-lang_langtag_(optional)"><code>--feed-lang <i>langtag</i></code> (optional)</dt>
 
 <dd>
-<p>Specifies the natural language used in textual parts of the Feed.  It
-is used as the value of <code>xml:lang</code> attribute of the root element of
-the Feed.</p>
-<p>If this option is not specified, the default value <em>i-default</em> is used.</p>
-<p>This option is ignored if the Feed already exists and has a
-<code>atom:link</code> element.</p>
-</dd>
-<dt><strong><code>--feed-license-url url</code> (optional)</strong></dt>
+<p>Specifies the natural language used in textual parts of the Feed. It is used as the value of <code>xml:lang</code> attribute of the root element of the Feed.</p>
+
+<p>If this option is not specified, the default value <var>i-default</var> is used.</p>
+
+<p>This option is ignored if the Feed already exists and has a <code>atom:link</code> element.</p>
+
+</dd><dt id="--feed-license-url_url_(optional)"><code>--feed-license-url <i>url</i></code> (optional)</dt>
 
 <dd>
-<p>Specifies the URL that describes the license of the Feed.  It is used
-as the <code>href</code> attribute value of an <code>atom:link</code> element whose <code>rel</code>
-is <code>license</code>.</p>
-<p>If this option is not specified, the <code>atom:link</code> element whose <code>rel</code>
-is <code>license</code> is not specified.</p>
-<p>The option value must be a URI reference conforming to <a href="http://www.ietf.org/rfc/rfc3986.txt" class="rfc">RFC 3986</a>.  It
-should be an absolute reference unless you understand what is the base
-URL that is used to resolve a relative reference.  Non-ASCII
-characters (i.e. IRI references) are not supported in this version of
-this script.</p>
-<p>This option is ignored if the Feed already has a <code>atom:link</code>
-element.</p>
-</dd>
-<dt><strong><code>--feed-related-url url</code> (optional)</strong></dt>
+<p>Specifies the URL that describes the license of the Feed. It is used as the <code>href</code> attribute value of an <code>atom:link</code> element whose <code>rel</code> is <code>license</code>.</p>
+
+<p>If this option is not specified, the <code>atom:link</code> element whose <code>rel</code> is <code>license</code> is not specified.</p>
+
+<p>The option value must be a URI reference conforming to RFC 3986. It should be an absolute reference unless you understand what is the base URL that is used to resolve a relative reference. Non-ASCII characters (i.e. IRI references) are not supported in this version of this script.</p>
+
+<p>This option is ignored if the Feed already has a <code>atom:link</code> element.</p>
+
+</dd><dt id="--feed-related-url_url_(optional)"><code>--feed-related-url <i>url</i></code> (optional)</dt>
 
 <dd>
-<p>Specifies a related URL for the Feed.  Usually the URL for the project
-Web page should be specified.  It is used as the <code>href</code> attribute
-value of an <code>atom:link</code> element whose <code>rel</code> is <code>related</code>.</p>
-<p>If this option is not specified, the <code>atom:link</code> element whose <code>rel</code>
-is <code>related</code> is not specified.</p>
-<p>The option value must be a URI reference conforming to <a href="http://www.ietf.org/rfc/rfc3986.txt" class="rfc">RFC 3986</a>.  It
-should be an absolute reference unless you understand what is the base
-URL that is used to resolve a relative reference.  Non-ASCII
-characters (i.e. IRI references) are not supported in this version of
-this script.</p>
-<p>This option is ignored if the Feed already has a <code>atom:link</code>
-element.</p>
-</dd>
-<dt><strong><a name="terms" class="item"><code>--feed-rights license-terms</code> (optional)</a></strong></dt>
+<p>Specifies a related URL for the Feed. Usually the URL for the project Web page should be specified. It is used as the <code>href</code> attribute value of an <code>atom:link</code> element whose <code>rel</code> is <code>related</code>.</p>
+
+<p>If this option is not specified, the <code>atom:link</code> element whose <code>rel</code> is <code>related</code> is not specified.</p>
+
+<p>The option value must be a URI reference conforming to RFC 3986. It should be an absolute reference unless you understand what is the base URL that is used to resolve a relative reference. Non-ASCII characters (i.e. IRI references) are not supported in this version of this script.</p>
+
+<p>This option is ignored if the Feed already has a <code>atom:link</code> element.</p>
+
+</dd><dt id="--feed-rights_license-terms_(optional)"><code>--feed-rights <code>license-terms</code></code> (optional)</dt>
 
 <dd>
-<p>Specifies the license terms for the Feed.  It is used as the content
-of the <code>atom:rights</code> element of the Feed.</p>
-<p>If there is the <code>atom:rights</code> element exists, its value is replaced
-by the value of this option.</p>
-<p>If this option is not specified, the <code>atom:rights</code> element is not
-added.  If there are already the <code>atom:rights</code> element specified,
-however, it is not removed from the Feed.</p>
+<p>Specifies the license terms for the Feed. It is used as the content of the <code>atom:rights</code> element of the Feed.</p>
+
+<p>If there is the <code>atom:rights</code> element exists, its value is replaced by the value of this option.</p>
+
+<p>If this option is not specified, the <code>atom:rights</code> element is not added. If there are already the <code>atom:rights</code> element specified, however, it is not removed from the Feed.</p>
+
 <p>Non-ASCII characters are not supported in this version of this script.</p>
-</dd>
-<dt><strong><code>--feed-title title</code> (optional)</strong></dt>
+
+</dd><dt id="--feed-title_title_(optional)"><code>--feed-title <code>title</code></code> (optional)</dt>
 
 <dd>
-<p>Specifies the title of the Feed.  It is used as the content of the
-<code>atom:title</code> of the Feed.</p>
-<p>If this option is not specified, the default value &quot;ChangeLog&quot; is used.</p>
+<p>Specifies the title of the Feed. It is used as the content of the <code>atom:title</code> of the Feed.</p>
+
+<p>If this option is not specified, the default value "ChangeLog" is used.</p>
+
 <p>If there is Feed exists, then this option is ignored.</p>
+
 <p>Non-ASCII characters are not supported in this version of this script.</p>
-</dd>
-<dt><strong><code>--feed-url url</code> (required)</strong></dt>
+
+</dd><dt id="--feed-url_url_(required)"><code>--feed-url <code>url</code></code> (required)</dt>
 
 <dd>
-<p>Specifies the URL of the Feed itself.  It is used in various places,
-such as in the <code>href</code> attribute of the <code>atom:link</code> element whose
-<code>rel</code> is <code>self</code>.</p>
-<p>The option value must be a URI reference conforming to <a href="http://www.ietf.org/rfc/rfc3986.txt" class="rfc">RFC 3986</a>.  It
-should be an absolute reference unless you understand what is the base
-URL that is used to resolve a relative reference.  Non-ASCII
-characters (i.e. IRI references) are not supported in this version of
-this script.</p>
-</dd>
-<dt><strong><a name="file" class="item"><code>--file-name path-to-atom-file</code> (required)</a></strong></dt>
+<p>Specifies the URL of the Feed itself. It is used in various places, such as in the <code>href</code> attribute of the <code>atom:link</code> element whose <code>rel</code> is <code>self</code>.</p>
+
+<p>The option value must be a URI reference conforming to RFC 3986. It should be an absolute reference unless you understand what is the base URL that is used to resolve a relative reference. Non-ASCII characters (i.e. IRI references) are not supported in this version of this script.</p>
+
+</dd><dt id="--file-name_path-to-atom-file_(required)"><code>--file-name <code>path-to-atom-file</code></code> (required)</dt>
 
 <dd>
 <p>Specifies the path to the file that contains the Atom Feed.</p>
-<p>If the specified file is not found, then a new file is created.
-Otherwise, the existing file is loaded as an Atom Feed and then it is
-updated.</p>
-<p>The file, if exists, must be encoded in UTF-8.  The new content of the
-file generated by this script is encoded in UTF-8.</p>
-</dd>
-<dt><strong><a name="help" class="item"><code>--help</code></a></strong></dt>
+
+<p>If the specified file is not found, then a new file is created. Otherwise, the existing file is loaded as an Atom Feed and then it is updated.</p>
+
+<p>The file, if exists, must be encoded in UTF-8. The new content of the file generated by this script is encoded in UTF-8.</p>
+
+</dd><dt id="--help"><code>--help</code></dt>
 
 <dd>
 <p>Shows a help message and aborts.</p>
 </dd>
 </dl>
-<p>
-</p>
-<hr />
-<h1><a name="dependency">DEPENDENCY</a></h1>
-<p>For the execution of <code>mkcommitfeed.pl</code>, the libiraries below are
-required, as well as Perl 5.10.0 or later:</p>
-<p>manakai-core <a href="http://suika.fam.cx/www/manakai-core/doc/web/">http://suika.fam.cx/www/manakai-core/doc/web/</a></p>
-<p>Whatpm <a href="http://suika.fam.cx/www/markup/html/whatpm/readme">http://suika.fam.cx/www/markup/html/whatpm/readme</a></p>
-<p>
-</p>
-<hr />
-<h1><a name="availability">AVAILABILITY</a></h1>
-<p>The latest version of this script is available in the Git repository:
-&lt;http://suika.fam.cx/gate/git/wi/vc/cvscommitfeed.git/tree&gt;.</p>
-<p>
-</p>
-<hr />
-<h1><a name="see_also">SEE ALSO</a></h1>
-<p>The <code>mkcommitfeed.pl</code> Web site
-<a href="http://suika.fam.cx/commitfeed/readme">http://suika.fam.cx/commitfeed/readme</a>.</p>
-<p>
-</p>
-<hr />
-<h1><a name="author">AUTHOR</a></h1>
-<p>Wakaba &lt;<a href="mailto:w@suika.fam.cx">w@suika.fam.cx</a>&gt;.</p>
-<p>
-</p>
-<hr />
-<h1><a name="history">HISTORY</a></h1>
-<p>This module was originally developed as part of Whatpm
-<a href="http://suika.fam.cx/www/markup/html/whatpm/readme">http://suika.fam.cx/www/markup/html/whatpm/readme</a>.</p>
-<p>An out-of-date Atom Feed for updates of this script, which was itself
-generated by this script, is available at
-<a href="http://suika.fam.cx/commitfeed/commitfeed-commit">http://suika.fam.cx/commitfeed/commitfeed-commit</a>.</p>
-<p>The script is no longer maintained as of 2012.  This script is
-considered obsolete, as Web interfaces for modern version management
-systems tend to have their own feeds.</p>
-<p>
-</p>
-<hr />
-<h1><a name="license">LICENSE</a></h1>
-<p>Copyright 2008-2012 Wakaba &lt;<a href="mailto:w@suika.fam.cx">w@suika.fam.cx</a>&gt;.</p>
-<p>This program is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.</p>
 
-</body>
+</section><section id="DEPENDENCY"><h1>DEPENDENCY</h1>
 
-</html>
+<p>For the execution of <code>mkcommitfeed.pl</code>, the libiraries below are required, as well as Perl 5.10.0 or later:</p>
+
+<p>manakai-core <code class="url">&lt;<a href="https://suika.suikawiki.org/www/manakai-core/doc/web/">https://suika.suikawiki.org/www/manakai-core/doc/web/</a>&gt;</code>.</p>
+
+<p>Whatpm <code class="url">&lt;<a href="https://suika.suikawiki.org/www/markup/html/whatpm/readme">https://suika.suikawiki.org/www/markup/html/whatpm/readme</a>&gt;</code>.</p>
+
+</section><section id="AVAILABILITY"><h1>AVAILABILITY</h1>
+
+<p>The latest version of this script is available in the Git repository: <code class="url">&lt;<a href="https://suika.suikawiki.org/gate/git/wi/vc/cvscommitfeed.git/tree">https://suika.suikawiki.org/gate/git/wi/vc/cvscommitfeed.git/tree</a>&gt;</code>.</p>
+
+</section><section id="SEE_ALSO"><h1>SEE ALSO</h1>
+
+<p>The <code>mkcommitfeed.pl</code> Web site <a href="https://suika.suikawiki.org/commitfeed/readme" class="podlinkurl">https://suika.suikawiki.org/commitfeed/readme</a>.</p>
+
+</section><section id="AUTHOR"><h1>AUTHOR</h1>
+
+<p>Wakaba &lt;wakaba@suikawiki.org&gt;.</p>
+
+</section><section id="HISTORY"><h1>HISTORY</h1>
+
+<p>This module was originally developed as part of Whatpm <a href="https://suika.suikawiki.org/www/markup/html/whatpm/readme" class="podlinkurl">https://suika.suikawiki.org/www/markup/html/whatpm/readme</a>.</p>
+
+<p>An out-of-date Atom Feed for updates of this script, which was itself generated by this script, is available at <a href="https://suika.suikawiki.org/commitfeed/commitfeed-commit" class="podlinkurl">https://suika.suikawiki.org/commitfeed/commitfeed-commit</a>.</p>
+
+<p>The script is no longer maintained as of 2012. This script is considered obsolete, as Web interfaces for modern version management systems tend to have their own feeds.</p>
+
+</section><section id="LICENSE"><h1>LICENSE</h1>
+
+<p>Copyright 2008-2012 Wakaba &lt;wakaba@suikawiki.org&gt;.</p>
+
+<p>This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.</p>
+
+
+
+
+</section>
+
+        <sw-ads normal></sw-ads>
+        <script src="https://manakai.github.io/js/global.js" async></script>
+
+        <footer>
+          <ul>
+          <li><a href="../" rel=top>Top</a>
+          </ul>
+        </footer>
+        <sw-ads-notes></sw-ads-notes>
+    

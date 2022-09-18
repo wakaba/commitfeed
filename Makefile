@@ -1,12 +1,19 @@
-POD2HTML = pod2html --css "http://suika.fam.cx/www/style/html/pod.css" \
-  --htmlroot "../.."
+P2H = local/p2h
+CURL = curl
 
-all: readme.html
+all: build
 
-readme.html: mkcommitfeed.pl
-	$(POD2HTML) $< > $@.tmp
-	sed 's/<\/head>/<link rel=feed type="application\/atom+xml" href=commitfeed-commit>/' $@.tmp > $@
-	rm $@.tmp
+local:
+	mkdir -p local
+
+$(P2H): local
+	$(CURL) -sSfL https://raw.githubusercontent.com/manakai/manakai.github.io/master/p2h > $@
+	chmod u+x $@
+
+build: readme.html
+
+readme.html: mkcommitfeed.pl $(P2H)
+	$(P2H) "commitfeed" $< > $@
 
 install-example:
 	cp mkcommitfeed-example /usr/local/bin/mkcommitfeed
